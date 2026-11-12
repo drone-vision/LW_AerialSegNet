@@ -1,4 +1,4 @@
-# AerialSegNet
+# LW-AerialSegNet
 
 **A lightweight separable encoder-decoder for multi-object segmentation of UAV aerial imagery**
 
@@ -251,12 +251,14 @@ version and is worth running as a baseline.
 ## Reference
 
 ```bibtex
-@article{behera_aerialsegnet,
-  title   = {AerialSegNet: a lightweight separable encoder-decoder for
-             multi-object segmentation of UAV aerial imagery},
-  author  = {Behera, Tanmay Kumar},
-  journal = {TODO},
-  year    = {TODO}
+@article{behera2023lightweight,
+  title={A lightweight deep learning architecture for vegetation segmentation using UAV-captured aerial images},
+  author={Behera, Tanmay Kumar and Bakshi, Sambit and Sa, Pankaj Kumar},
+  journal={Sustainable computing: Informatics and systems},
+  volume={37},
+  pages={100841},
+  year={2023},
+  publisher={Elsevier}
 }
 ```
 
