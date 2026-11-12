@@ -33,6 +33,7 @@ without the parameter cost of a DenseNet unit.
 Downsampling is 2x2 max pooling. Upsampling uses a learned `ConvTranspose2d`
 that cuts the channel count to a quarter before the skip is concatenated, so
 the decoder stays narrower than the encoder at every matching resolution.
+![Model:](assets/1-s2.0-S221053792200172X-gr1_lrg.jpg)
 
 ![Validation predictions](assets/predictions.jpg)
 
