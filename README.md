@@ -262,7 +262,3 @@ version and is worth running as a baseline.
   publisher={Elsevier}
 }
 ```
-
-## Questions
-
-Open an issue on this repository.
