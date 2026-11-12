@@ -1,0 +1,11 @@
+torch>=2.0
+torchvision
+numpy
+pillow
+tqdm
+jsonargparse>=4.27
+matplotlib
+
+# optional, for the notebook and for exporting history
+pandas
+torchsummary
