@@ -1,0 +1,55 @@
+# AerialSegNet on NITRDrone - the published configuration.
+#
+# This reproduces the reported run: 2,486,562 parameters, RAdam at 1e-5 with
+# ReduceLROnPlateau stepped every 3rd epoch, weighted cross-entropy with
+# weights derived from the first training batch.
+#
+# Every field can be overridden on the command line, e.g.
+#   python train.py -c configs/exp/aerialsegnet_nitrdrone.yaml --train.epochs 10
+
+config_tag: aerialsegnet_nitrdrone
+seed: 42
+device: auto              # cuda, cpu or auto
+res_path: ./results
+ckpt_path: ./checkpoints  # directory when training, .pth file when --eval_only
+
+model:
+  in_ch: 3
+  n_classes: 4
+  base_channels: 32       # 32 gives the published 2,486,562 parameters
+  head_activation: relu   # "none" is the conventional choice, see models/aerial_segnet.py
+
+data:
+  data_path: ./datasets/NITRDrone
+  img_size: 480
+  batch_size: 5
+  val_batch_size: 2
+  test_batch_size: 1
+  num_workers: 4
+  pin_memory: false
+  load_test: false        # true once test_images/ and test_masks/ exist
+  train_transforms:       # geometric only; the mask goes through the same pipeline
+    - Resize: {}
+    - RandomCrop: {}
+    - CenterCrop: {}
+
+loss:
+  name: cross_entropy
+  class_weights: null     # null -> derive with 1 / log(c + p_class)
+  auto_weight: true
+  weight_c: 1.02
+  weight_full_pass: false # false matches the published [1.894, 18.976, 48.039, 3.712]
+
+train:
+  epochs: 150
+  optimizer: radam        # radam, adam, adamw, sgd
+  lr: 1.0e-5
+  weight_decay: 2.0e-4
+  scheduler:
+    type: plateau         # plateau, step, cosine, none
+    factor: 0.2
+    patience: 2
+    cooldown: 2
+  scheduler_every_n_epochs: 3
+  legacy_step_sampling: false
+  steps_per_epoch: null

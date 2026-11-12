@@ -1,0 +1,5 @@
+# No activation on the logits, the conventional setup for softmax cross-entropy.
+# Worth running as a baseline against the published relu head.
+config_tag: aerialsegnet_linear_head
+model:
+  head_activation: none

@@ -1,0 +1,4 @@
+# Half-width model, 16 base channels. Roughly a quarter of the parameters.
+config_tag: aerialsegnet_tiny
+model:
+  base_channels: 16

@@ -1,0 +1,4 @@
+# PReLU on the output head instead of ReLU.
+config_tag: aerialsegnet_prelu
+model:
+  head_activation: prelu

@@ -1,0 +1,53 @@
+# Byte-for-byte reproduction of the notebook's training loop.
+#
+# Differs from aerialsegnet_nitrdrone.yaml in one place: the notebook drew each
+# training batch with next(iter(train_loader)) inside the step loop, so batches
+# were sampled with replacement and the worker processes were respawned every
+# step. steps_per_epoch is len(train_images) // 3 = 817 because the notebook
+# computed the step count with batch_size 3 while the loader used 5.
+#
+# Use this only to match the published numbers. For new experiments use
+# aerialsegnet_nitrdrone.yaml.
+
+config_tag: reproduce_notebook
+seed: 42
+device: auto
+res_path: ./results
+ckpt_path: ./checkpoints
+
+model:
+  in_ch: 3
+  n_classes: 4
+  base_channels: 32
+  head_activation: relu
+
+data:
+  data_path: ./datasets/NITRDrone
+  img_size: 480
+  batch_size: 5
+  val_batch_size: 2
+  num_workers: 4
+  train_transforms:
+    - Resize: {}
+    - RandomCrop: {}
+    - CenterCrop: {}
+
+loss:
+  name: cross_entropy
+  auto_weight: true
+  weight_c: 1.02
+  weight_full_pass: false
+
+train:
+  epochs: 150
+  optimizer: radam
+  lr: 1.0e-5
+  weight_decay: 2.0e-4
+  scheduler:
+    type: plateau
+    factor: 0.2
+    patience: 2
+    cooldown: 2
+  scheduler_every_n_epochs: 3
+  legacy_step_sampling: true
+  steps_per_epoch: 817

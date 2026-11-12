@@ -1,0 +1,9 @@
+# Adam with cosine annealing instead of RAdam with plateau.
+config_tag: aerialsegnet_adam_cosine
+train:
+  optimizer: adam
+  lr: 1.0e-4
+  scheduler:
+    type: cosine
+    T_max: 150
+  scheduler_every_n_epochs: 1

@@ -1,0 +1,4 @@
+# Mish on the output head instead of ReLU.
+config_tag: aerialsegnet_mish
+model:
+  head_activation: mish

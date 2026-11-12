@@ -1,0 +1,12 @@
+# Adds the flip and rotation transforms that sit commented out in the notebook.
+# Train and validation mIoU are 28 points apart in the published run, so this
+# is the first thing to try against that gap.
+config_tag: aerialsegnet_augmented
+data:
+  train_transforms:
+    - Resize: {}
+    - RandomCrop: {}
+    - CenterCrop: {}
+    - RandomHorizontalFlip: {p: 0.5}
+    - RandomVerticalFlip: {p: 0.5}
+    - RandomRotation: {degrees: 30}
